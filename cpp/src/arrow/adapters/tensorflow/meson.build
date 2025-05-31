@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-#
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -17,15 +15,11 @@
 # specific language governing permissions and limitations
 # under the License.
 
-set -ex
+install_headers(['convert.h'], subdir: 'arrow/adapters/tensorflow')
 
-source_dir=${1}/js
-build_dir=${2}/js
-
-pushd ${build_dir}
-
-yarn lint
-yarn test
-yarn test:bundle
-
-popd
+pkg.generate(
+    filebase: 'arrow-tensorflow',
+    name: 'Apache Arrow Tensorflow',
+    description: 'Tensorflow modules for Apache Arrow',
+    requires: ['arrow'],
+)
