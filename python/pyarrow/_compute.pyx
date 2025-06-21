@@ -40,6 +40,10 @@ except ImportError:
 import warnings
 
 
+# Call to initialize the compute module (register kernels) on import
+check_status(InitializeCompute())
+
+
 __pas = None
 _substrait_msg = (
     "The pyarrow installation is not built with support for Substrait."
@@ -2995,7 +2999,7 @@ def register_scalar_function(func, function_name, function_doc, in_types, out_ty
         all arguments are scalar, else it must return an Array.
 
         To define a varargs function, pass a callable that takes
-        *args. The last in_type will be the type of all varargs
+        ``*args``. The last in_type will be the type of all varargs
         arguments.
     function_name : str
         Name of the function. There should only be one function
